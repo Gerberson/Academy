@@ -1,10 +1,12 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
+const { urlencoded } = require('express')
 
 const server = express()
 
 //MIDDLEWARE
+server.use(urlencoded({ extended : true }))
 server.use(express.static('public'))
 server.use(routes)
 
