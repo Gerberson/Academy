@@ -70,4 +70,25 @@ header {
     margin: 45px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    animation-name: up;
+    animation-duration: 700ms;
+    animation-timing-function: ease-out;/*transição*/
+    animation-fill-mode: forwards;/*Para no "to" da animação*/
+    animation-delay: 1s;
+    animation-play-state: running;/*pode deixar paused ou running*/
+    animation-direction: normal;/*reverte a direção*/
+    animation-iteration-count: 3;/*define qtd vezes*/
+}
+
+@keyframes up {
+    from {
+        opacity: 0;
+        transform: translateY(15px) ;
+    }
+    to {
+        opacity: 1;
+    }
 }
