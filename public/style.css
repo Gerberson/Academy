@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 :root {
-    --primary-color: #7159c1
+    --primary-color: #7159c1;
+    --primary-label: rgb(128, 128, 128);
+    --primary-line: rgba(0, 0, 0, 0.1);
+    --secondary-color: rgb(238, 238, 0);
 }
 
 * {
@@ -66,7 +69,7 @@ header {
 .card {
     background-color: white;
     width: 800px;
-    height: 400px;
+    min-height: 400px;
     margin: 45px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -87,4 +90,49 @@ header {
     to {
         opacity: 1;
     }
+}
+
+/* === Details === */
+.details {
+    padding: 32px;
+}
+
+.details h3 {
+    color: var(--primary-label);
+    font-weight: bold;
+    letter-spacing: 0.7px;
+}
+
+.details .item {
+    border-bottom: 1px solid var(--primary-line);
+    padding: 16px 0;
+}
+
+.details .item:last-child {
+    border: none;
+}
+
+.details .item div:nth-child(1) {
+    color: var(--primary-label);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.7px;
+    font-weight: normal;
+}
+
+.details .item div:nth-child(2) {
+    font-weight: bold;
+}
+
+.details .item span {
+    padding: 8px 16px;
+    background-color: var(--secondary-color);
+    border-radius: 16px;
+    display: inline-block;
+    color: var(--primary-label);
+    margin-right: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
 }
