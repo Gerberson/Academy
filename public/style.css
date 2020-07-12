@@ -75,17 +75,13 @@ header {
     opacity: 0;
     animation-name: up;
     animation-duration: 700ms;
-    animation-timing-function: ease-out;/*transição*/
-    animation-fill-mode: forwards;/*Para no "to" da animação*/
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
     animation-delay: 1s;
-    animation-play-state: running;/*pode deixar paused ou running*/
-    animation-direction: normal;/*reverte a direção*/
-    animation-iteration-count: 3;/*define qtd vezes*/
 }
 
 @keyframes up {
     from {
-        opacity: 0;
         transform: translateY(15px) ;
     }
     to {
