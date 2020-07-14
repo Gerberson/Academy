@@ -9,15 +9,45 @@ exports.post = (req, res) => {
             return res.send("Todos os campos dever ser preenchidos.")
     }
 
-    req.body.created_at = Date.now()
-    req.body.birth = Date.parse(req.body.birth)
+    let { 
+        avatar_url, 
+        birth,
+        name,
+        services,
+        gender
+    } = req.body
 
-    data.instructors.push(req.body)
+    const id = Number(data.instructors.length + 1)
+    const created_at = Date.now()
+    birth = Date.parse(req.body.birth)
+
+    data.instructors.push({
+        id,
+        avatar_url, 
+        name,
+        birth,
+        created_at,
+        gender,
+        services
+    })
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
         if (err)
             return res.send('Write file error!')
         
-        return res.redirect('/instructors')
+        return res.redirect('/instructors/create')
     })
+}
+
+exports.show = (req, res) => {
+    const { id } = req.params
+
+    const foundIntructor = data.instructors.find((instructor) => {
+        return instructor.id == id
+    })
+
+    if (!foundIntructor)
+        return res.send('Instructor not found!')
+
+    return res.send(foundIntructor)
 }
