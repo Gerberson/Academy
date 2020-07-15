@@ -2,7 +2,7 @@
   "instructors": [
     {
       "id": 1,
-      "avatar_url": "http://teste",
+      "avatar_url": "https://source.unsplash.com/collection/3465564/500x500",
       "name": "Gerberson Dias",
       "birth": -157766400000,
       "created_at": 1594738003080,
@@ -11,12 +11,48 @@
     },
     {
       "id": 2,
-      "avatar_url": "http://teste",
+      "avatar_url": "https://source.unsplash.com/collection/3465564/500x500",
       "name": "Neusa Dias",
       "birth": 958867200000,
       "created_at": 1594757755832,
+      "gender": "F",
+      "services": "Cooper, Escalada, Flex, Pump, Footing, Cooper, Escalada, Flex, Pump, Footing"
+    },
+    {
+      "id": 3,
+      "avatar_url": "https://source.unsplash.com/collection/3465564/500x500",
+      "name": "Rafaela Duran",
+      "birth": 660182400000,
+      "created_at": 1594763182484,
+      "gender": "F",
+      "services": "Colting, DuoRun, Runpel, Dulper"
+    },
+    {
+      "id": 4,
+      "avatar_url": "https://source.unsplash.com/collection/3465564/500x500",
+      "name": "Flavio Correa",
+      "birth": 660182400000,
+      "created_at": 1594763573838,
       "gender": "M",
-      "services": "teste"
+      "services": "Jump, Pump, Cross, Fitness"
+    },
+    {
+      "id": 5,
+      "avatar_url": "http://teste",
+      "name": "Miriam",
+      "birth": 693273600000,
+      "created_at": 1594841998841,
+      "gender": "F",
+      "services": "Crossfit, Musculação"
+    },
+    {
+      "id": 6,
+      "avatar_url": "http://teste",
+      "name": "Batista Santos",
+      "birth": 946684800000,
+      "created_at": 1594842577866,
+      "gender": "M",
+      "services": "Crossfit, Musculação"
     }
   ]
 }
