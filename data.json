@@ -35,24 +35,6 @@
       "created_at": 1594763573838,
       "gender": "M",
       "services": "Jump, Pump, Cross, Fitness"
-    },
-    {
-      "id": 5,
-      "avatar_url": "http://teste",
-      "name": "Miriam",
-      "birth": 693273600000,
-      "created_at": 1594841998841,
-      "gender": "F",
-      "services": "Crossfit, Musculação"
-    },
-    {
-      "id": 6,
-      "avatar_url": "http://teste",
-      "name": "Batista Santos",
-      "birth": 946684800000,
-      "created_at": 1594842577866,
-      "gender": "M",
-      "services": "Crossfit, Musculação"
     }
   ]
 }

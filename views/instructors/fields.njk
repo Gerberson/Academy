@@ -41,7 +41,7 @@
         <input 
             type="radio" 
             name="gender" v
-            alue="F"
+            value="F"
             {% if instructor.gender == "F" %}
                 checked
             {% endif %}
@@ -57,3 +57,5 @@
         value="{{ instructor.services }}"
     >
 </div>
+
+<button type="submit">Salvar</button>
