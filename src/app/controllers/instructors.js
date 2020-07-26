@@ -1,6 +1,7 @@
 const fs = require('fs')
 const data = require('../../../data.json')
 const { age, date } = require('../../lib/utils')
+const db = require('../../config/db')
 
 module.exports = {
     index(req, res) {
@@ -19,35 +20,30 @@ module.exports = {
             if (req.body[key] == "")
                 return res.send("Todos os campos dever ser preenchidos.")
         }
-    
-        let { 
-            avatar_url, 
-            birth,
-            name,
-            services,
-            gender
-        } = req.body
-    
-        const id = Number(data.instructors.length + 1)
-        const created_at = Date.now()
-        birth = Date.parse(req.body.birth)
-    
-        data.instructors.push({
-            id,
-            avatar_url, 
-            name,
-            birth,
-            created_at,
-            gender,
-            services
+        
+        const query = `
+            INSERT INTO 
+                instructors (name, avatar_url, gender, services, birth, created_at)
+                values ($1, $2, $3, $4, $5, $6)
+                RETURNING id
+        `
+
+        const values = [
+            req.body.name,
+            req.body.avatar_url,
+            req.body.gender,
+            req.body.services,
+            date(req.body.birth).iso,
+            date(Date.now()).iso
+        ]
+
+        db.query(query, values, (err, result) => {
+            if(err) res.send('Database Error')
+
+            return res.redirect(`/instructors/${result.rows[0].id}`)
         })
-    
-        fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
-            if (err)
-                return res.send('Write file error!')
-            
-            return res.redirect('/instructors/create')
-        })
+
+        return
     },
     show(req, res) {
         const { id } = req.params
