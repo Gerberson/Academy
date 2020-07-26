@@ -2,30 +2,32 @@
 
 {% block content %}
     <div class="card">
-        <section class="avatar" style="background: url({{ instructor.avatar_url }}) no-repeat center center / cover" >
+        <section class="avatar" style="background: url({{ member.avatar_url }}) no-repeat center center / cover" >
         </section>
 
         <section class="details">
-            <form method="POST" action="/instructors?_method=PUT">
+            <form method="POST" action="/members?_method=PUT">
                 <h3>Editar</h3>
 
-                {% include "instructors/fields.njk" %}
+                {% include "members/fields.njk" %}
 
                 <input 
                     type="hidden" 
                     name="id" 
-                    value={{ instructor.id }}
+                    value={{ member.id }}
                 >
             </form>
-            <form method="POST" id="form-delete" action="/instructors?_method=DELETE">
+            <form method="POST" id="form-delete" action="/members?_method=DELETE">
                 <input 
                     type="hidden" 
                     name="id" 
-                    value={{ instructor.id }}
+                    value={{ member.id }}
                 >
 
                 <button type="submit">Deletar</button>
             </form>
+
+            <script src="/deletar.js" ></script>
         </section>
     </div>
 {% endblock %}
