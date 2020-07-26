@@ -38,55 +38,31 @@ module.exports = {
             instructor.services = instructor.services.split(','),
             instructor.created_at = date(instructor.created_at).format
                 
-            return res.render('instructors/show', { instructor: instructor })
+            return res.render('instructors/show', { instructor })
         })
-        return
     },
     edit(req, res) {
-        const { id } = req.params
-
-        const foundIntructor = data.instructors.find((instructor) => {
-            return instructor.id == id
-        })
-    
-        if (!foundIntructor)
-            return res.send('Instructor not found!')
-    
-        const instructor = {
-            ...foundIntructor,
-            birth: date(foundIntructor.birth).iso
-        }
         
-        return res.render('instructors/edit', { instructor: instructor })
+        instructor.find(req.params.id, (instructor) => {
+            if (!instructor) 
+                return res.send('Instructor not found!')
+            
+            instructor.birth = date(instructor.birth).iso
+                
+            return res.render('instructors/edit', { instructor })
+        })    
     },
     put(req, res) {
-        const { id } = req.body
-
-        let index = 0
-        const foundIntructor = data.instructors.find((instructor, foundIndex) => {
-            if (instructor.id == id) {
-                index = foundIndex
-                return true
-            }
-        })
+        const keys = Object.keys(req.body)
     
-        if (!foundIntructor)
-            return res.send('Instructor not found!')
-    
-        const instructor = {
-            ...foundIntructor,
-            ...req.body,
-            birth: Date.parse(req.body.birth),
-            id: Number(req.body.id)
+        for(key of keys) {
+            if (req.body[key] == '')
+                return res.send('Please, fill all fields')
         }
-    
-        data.instructors[index] = instructor
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
-            if (err)
-                return res.send("Write error")
-            
-            return res.redirect(`/instructors/${id}`)
+        
+
+        instructor.update(req.body, (instructor) => {
+            return res.redirect(`instructors/${req.body.id}`)
         })
     },
     delete(req, res) {
