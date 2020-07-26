@@ -1,6 +1,7 @@
 const fs = require('fs')
 const data = require('../../../data.json')
 const instructor = require('../models/instructor')
+const { age, date } = require('../../lib/utils')
 
 module.exports = {
     index(req, res) {
@@ -29,23 +30,17 @@ module.exports = {
         return
     },
     show(req, res) {
-        const { id } = req.params
-
-        const foundIntructor = data.instructors.find((instructor) => {
-            return instructor.id == id
+        instructor.find(req.params.id, (instructor) => {
+            if (!instructor) 
+                return res.send('Instructor not found!')
+            
+            instructor.age = age(instructor.birth),
+            instructor.services = instructor.services.split(','),
+            instructor.created_at = date(instructor.created_at).format
+                
+            return res.render('instructors/show', { instructor: instructor })
         })
-    
-        if (!foundIntructor)
-            return res.send('Instructor not found!')
-    
-        const instructor = {
-            ...foundIntructor,
-            age: age(foundIntructor.birth),
-            services: foundIntructor.services.split(','),
-            created_at: new Intl.DateTimeFormat("pt-BR").format(foundIntructor.created_at)
-        }
-    
-        return res.render('instructors/show', { instructor: instructor })
+        return
     },
     edit(req, res) {
         const { id } = req.params
