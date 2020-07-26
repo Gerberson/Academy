@@ -1,5 +1,3 @@
-const fs = require('fs')
-const data = require('../../../data.json')
 const instructor = require('../models/instructor')
 const { age, date } = require('../../lib/utils')
 
@@ -66,19 +64,8 @@ module.exports = {
         })
     },
     delete(req, res) {
-        const { id } = req.body
-    
-        const filteredIntructors = data.instructors.filter((instructor) => {
-            return instructor.id != id
-        })
-    
-        data.instructors = filteredIntructors
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
-            if (err)
-                return res.send('Write file error!')
-            
-            return res.redirect('/instructors')
+        instructor.delete(req.body.id, (instructor) => {
+            return res.redirect(`instructors`)
         })
     },
 }
