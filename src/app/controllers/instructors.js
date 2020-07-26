@@ -8,7 +8,11 @@ module.exports = {
         return res.redirect('instructors')
     },
     details(req, res) {
-        return res.render('instructors/index', { instructors: data.instructors })
+        db.query('SELECT * FROM instructors', (err, result) => {
+            if(err) res.send('Database Error!')
+            
+            return res.render('instructors/index', { instructors: result.rows })
+        })
     },
     create(req, res) {
         return res.render('instructors/create')
