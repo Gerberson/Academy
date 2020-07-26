@@ -1,17 +1,14 @@
 const fs = require('fs')
 const data = require('../../../data.json')
-const { age, date } = require('../../lib/utils')
-const db = require('../../config/db')
+const instructor = require('../models/instructor')
 
 module.exports = {
     index(req, res) {
         return res.redirect('instructors')
     },
     details(req, res) {
-        db.query('SELECT * FROM instructors', (err, result) => {
-            if(err) res.send('Database Error!')
-            
-            return res.render('instructors/index', { instructors: result.rows })
+        instructor.all((instructors) => {
+            return res.render('instructors/index', { instructors })
         })
     },
     create(req, res) {
@@ -25,26 +22,8 @@ module.exports = {
                 return res.send("Todos os campos dever ser preenchidos.")
         }
         
-        const query = `
-            INSERT INTO 
-                instructors (name, avatar_url, gender, services, birth, created_at)
-                values ($1, $2, $3, $4, $5, $6)
-                RETURNING id
-        `
-
-        const values = [
-            req.body.name,
-            req.body.avatar_url,
-            req.body.gender,
-            req.body.services,
-            date(req.body.birth).iso,
-            date(Date.now()).iso
-        ]
-
-        db.query(query, values, (err, result) => {
-            if(err) res.send('Database Error')
-
-            return res.redirect(`/instructors/${result.rows[0].id}`)
+        instructor.create(req.body, (instructor) => {
+            return res.redirect(`/instructors/${instructor.id}`)
         })
 
         return
