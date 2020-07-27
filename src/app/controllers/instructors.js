@@ -6,9 +6,17 @@ module.exports = {
         return res.redirect('instructors')
     },
     details(req, res) {
-        instructor.all((instructors) => {
-            return res.render('instructors/index', { instructors })
-        })
+        const { filter } = req.query
+
+        if(filter)  {
+            instructor.findBy(filter, (instructors) => {
+                return res.render('instructors/index', { instructors, filter })
+            })
+        } else {
+            instructor.all((instructors) => {
+                return res.render('instructors/index', { instructors })
+            })
+        }
     },
     create(req, res) {
         return res.render('instructors/create')
