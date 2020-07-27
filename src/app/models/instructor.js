@@ -1,9 +1,18 @@
 const { date } = require('../../lib/utils')
 const db = require('../../config/db')
+const { Query } = require('pg')
 
 module.exports = {
     all(callback) {
-        db.query('SELECT * FROM instructors ORDER BY id DESC', (err, results) => {
+        const query = `
+            SELECT instructors.*, count(members) as total_students
+            FROM instructors
+            LEFT JOIN members ON (members.instructor_id = instructors.id)
+            GROUP BY instructors.id
+            ORDER BY total_students DESC
+        `
+
+        db.query(query, (err, results) => {
             if(err) 
                 throw `Database Error! ${err}`
 
@@ -52,8 +61,9 @@ module.exports = {
                 name=($2),
                 birth=($3),
                 gender=($4),
-                services=($5)
-            WHERE id = $6
+                services=($5),
+                total_students=($6)
+            WHERE id = $7
         `
 
         const values = [
@@ -62,7 +72,8 @@ module.exports = {
             date(data.birth).iso,
             data.gender,
             data.services,
-            data.id
+            data.id,
+            data.total_students
         ]
 
         db.query(query, values, (err, results) => {
