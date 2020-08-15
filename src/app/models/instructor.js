@@ -61,9 +61,8 @@ module.exports = {
                 name=($2),
                 birth=($3),
                 gender=($4),
-                services=($5),
-                total_students=($6)
-            WHERE id = $7
+                services=($5)
+            WHERE id = $6
         `
 
         const values = [
@@ -73,7 +72,6 @@ module.exports = {
             data.gender,
             data.services,
             data.id,
-            data.total_students
         ]
 
         db.query(query, values, (err, results) => {

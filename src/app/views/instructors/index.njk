@@ -11,7 +11,7 @@
         </div>
 
         <table>
-            <thead>
+            <thead id="table-head">
                 <tr>
                     <th>Instructor</th>
                     <th>Acompanhamento</th>
@@ -26,8 +26,8 @@
                             <span style="background-image: url({{instructor.avatar_url}})"></span>
                             {{ instructor.name }}
                         </td>
-                        <td>{{ instructor.services }}</td>
-                        <td>{{ instructor.total_students }}</td>
+                        <td><img src="/services.svg">{{ instructor.services }}</td>
+                        <td><img src="/alunos.svg">{{ instructor.total_students }}</td>
                         <td><a href="/instructors/{{ instructor.id }}">Ver</a> </td>
                     </tr>
                 {% endfor %}

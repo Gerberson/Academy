@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th>Member</th>
-                    <th>E-mail</th>
+                    <th id="email">E-mail</th>
                     <th>Peso</th>
                     <th>Altura</th>
                     <th>Ação</th>
@@ -27,9 +27,9 @@
                             <span style="background-image: url({{member.avatar_url}})"></span>
                             {{ member.name }}
                         </td>
-                        <td>{{ member.email }}</td>
-                        <td>{{ member.weight }}</td>
-                        <td>{{ member.height }}</td>
+                        <td id="email">{{ member.email }}</td>
+                        <td> <img src="/peso.svg" alt=""> {{ member.weight }}</td>
+                        <td id="altura"> <img src="/altura.svg" alt=""> {{ member.height }}</td>
                         <td><a href="/members/{{ member.id }}">Ver</a> </td>
                     </tr>
                 {% endfor %}
