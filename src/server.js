@@ -3,6 +3,7 @@ const nunjucks = require('nunjucks')
 const routes = require('./routes')
 const { urlencoded } = require('express')
 const methodOverride = require('method-override')
+const dotenv = require('dotenv')
 
 const server = express()
 
@@ -22,6 +23,8 @@ nunjucks.configure('src/app/views', {
 })
 
 const PORT = process.env.PORT || 8877
+
+dotenv.config()
 
 //SERVINDO A PORTA
 server.listen(PORT, () => console.log("server is running"))
