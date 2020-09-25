@@ -5,9 +5,6 @@ const members = require('./app/controllers/members')
 
 routes.get('/', instructors.index)
 routes.get('/instructors', instructors.details)
-routes.get('/teste', (req, res) => {
-    res.send("ROTA TESTE OK!!")
-})
 routes.get('/instructors/create', instructors.create)
 routes.get('/instructors/:id', instructors.show)
 routes.get('/instructors/:id/edit', instructors.edit)

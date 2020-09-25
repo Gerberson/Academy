@@ -24,7 +24,5 @@ nunjucks.configure('src/app/views', {
 
 const PORT = process.env.PORT || 8877
 
-dotenv.config()
-
 //SERVINDO A PORTA
 server.listen(PORT, () => console.log("server is running"))

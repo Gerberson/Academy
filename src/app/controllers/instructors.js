@@ -1,11 +1,14 @@
 const instructor = require('../models/instructor')
 const { age, date } = require('../../lib/utils')
+const { seedInstructors } = require('../Seeding/Seeding')
 
 module.exports = {
     index(req, res) {
         return res.redirect('instructors')
     },
-    details(req, res) {
+    async details(req, res) {
+        await seedInstructors()
+        
         let { filter, page, limit } = req.query
 
         page = page || 1
@@ -86,5 +89,5 @@ module.exports = {
         instructor.delete(req.body.id, (instructor) => {
             return res.redirect(`instructors`)
         })
-    },
+    }
 }

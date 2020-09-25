@@ -1,11 +1,14 @@
 const Member = require('../models/member')
 const { age, date } = require('../../lib/utils')
+const { seedMembers } = require('../Seeding/Seeding')
 
 module.exports = {
     index(req, res) {
         return res.redirect('members')
     },
-    details(req, res) {
+    async details(req, res) {
+        await seedMembers()
+
         let { filter, page, limit } = req.query
         
         page = page || 1
