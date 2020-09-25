@@ -43,7 +43,6 @@ function createPagination(pagination) {
     const page = +pagination.dataset.page
     const total = +pagination.dataset.total
     const pages = paginate(page, total)
-    console.log(pages)
     let elements = ""
 
     for (let page of pages) {

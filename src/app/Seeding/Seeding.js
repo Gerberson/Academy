@@ -12,8 +12,6 @@ module.exports = {
             throw `Database Error! ${err}`
         })
 
-        console.log(registros)
-
         if (registros == 31)
         {
             const queryDelete = `DELETE FROM instructors;`
